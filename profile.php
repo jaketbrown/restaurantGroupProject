@@ -1,5 +1,15 @@
 <?php
-require_once('database.php');
+require('database.php');
+
+getUserInfo($_SESSION['username']);
+$name = $_SESSION['name'];
+$bio = $_SESSION['bio'];
+$profilepic = $_SESSION['profilepic'];
+$email = $_SESSION['email'];
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +24,7 @@ require_once('database.php');
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-  <script type="module" src="menu.js"></script>
+  <script src="menu.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-sm fixed-top bg-dark navbar-dark">
@@ -37,67 +47,89 @@ require_once('database.php');
 <br/>
 <br/>
 <br/>
-
-<style>
-.profile-img{
-    text-align: center;
-}
-.profile-img img{
-    width: 70%;
-    height: 100%;
-}
-.profile-img .file {
-    position: relative;
-    overflow: hidden;
-    margin-top: -20%;
-    width: 70%;
-    border: none;
-    border-radius: 0;
-    font-size: 15px;
-    background: #212529b8;
-}
-.profile-img .file input {
-    position: absolute;
-    opacity: 0;
-    right: 0;
-    top: 0;
-}
-
-</style>
-
-
-<div class="container emp-profile">
-            <form method="post">
+<div class="container">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="https://34yigttpdc638c2g11fbif92-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/default-user-img.jpg" alt="" width="300" height="300"/>
-                            <div class="file btn btn-primary">
-								Change Profile Picture
-                                <input type="file" name="file" value=""/>
+                            <img src="<?php echo $pic;?>" alt="" width="300" height="300" />
+                            <div>
+                               <input type="file"/>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        TODO: get name from SESSION php array
+                                        <?php echo $name;?>
                                     </h5>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                    <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">TBD</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile">Bio</a>
+                                </li>
+								 <li class="nav-item">
+                                    <a class="nav-link" id="edit-profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile">Edit Profile</a>
                                 </li>
                             </ul>
                         </div>
+                    
+					
+						<div class="col-md-8" style="border: 1px solid black">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>User Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>TBD</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>TBD</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>fake@gmail.com</p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Your Bio</label><br/>
+                                        <p>Your detail description</p>
+                                    </div>
+                                </div>
+                            </div>
+							
+							<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Your Bio</label><br/>
+                                        <p>Your detail description</p>
+										<button class="btn" value="test"></button>
+                                    </div>
+                                </div>
+                            </div>
+							
+							
+                        </div>
                     </div>
-                    <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-                    </div>
-                </div>
-            </form>           
+                </div>         
+				</div>
+        </div>
+		</div>
         </div>
 	</body>
 </html>
