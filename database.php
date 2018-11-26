@@ -8,14 +8,14 @@ $database = "mydb";
 $db = mysqli_connect($host, $user, $password, $database) or die("failed to connect to db");
 
 
-function register($username, $password, $email) {
+function register($username, $password, $email, $name) {
 	global $db;
-	$sql = sprintf("INSERT INTO users (username, password, profilepic, bio, email) VALUES ('%s', '%s', '', '', '%s')", $username, $password, $email);
+	$sql = sprintf("INSERT INTO users (username, password, profilepic, bio, email, name) VALUES ('%s', '%s', '', '', '%s' , '%s')", $username, $password, $email, $name);
     $result = mysqli_query($db, $sql);
 	if(!$result) {
 		echo mysqli_error($db);
 	} else {
-		$_SESSION['username'] = $username;
+		// $_SESSION['username'] = $username;
 		header('Location: main.php');
 	}
 	mysqli_close($db);
@@ -97,5 +97,37 @@ function changePassword($username, $password) {
 	mysqli_close($db);
 }
 
+function getPassword($username) {
+	global $db;
+	$sql = sprintf("SELECT password FROM users WHERE username='%s'", $username);
+    $result = mysqli_query($db, $sql);
+	if(!$result) {
+		echo mysqli_error($db);
+	}
+	else {
+		while ($mysql_array = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+			return $mysql_array['password'];
+	    }
+	}
+	mysqli_close($db);
+}
 
+function getUser($username) {
+	global $db;
+	$sql = sprintf("SELECT username FROM users WHERE username='%s'", $username);
+    $result = mysqli_query($db, $sql);
+	if(!$result) {
+
+	}
+	else {
+		while ($mysql_array = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+			return true;
+	    }
+		return false;
+		// if(mysqli_fetch_array($result) != false)
+		// 	return true;
+		// return false;
+	}
+	mysqli_close($db);
+}
 ?>

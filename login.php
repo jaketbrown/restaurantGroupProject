@@ -12,6 +12,13 @@
 	<script src="menu.js"></script>
 </head>
 <body>
+
+<?php
+
+require_once("database.php");
+
+$top = <<<TOP
+<form action="{$_SERVER['PHP_SELF']}" method = "post" >
 <nav class="navbar navbar-expand-sm fixed-top bg-dark navbar-dark">
   <a class="navbar-brand" href="main.html">LogoGoesHere</a>
   <div class="collapse navbar-collapse justify-content-end">
@@ -22,28 +29,61 @@
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
       </li>
-	  <li class="nav-item">
-			<a class="nav-link" href="#"><span class="fas fa-sign-in-alt"></span> Login</a>
-	  </li>
-	</ul>
+    <li class="nav-item">
+      <a class="nav-link" href="#"><span class="fas fa-sign-in-alt"></span> Login</a>
+    </li>
+  </ul>
   </div>
 </nav>
 <br/>
 <div class="container" style="margin-top:50px;" align="center">
 
-	<!-- 1st row -->
+  <!-- 1st row -->
     <div class="col-sm-6">
       <h4><em>Login</em></h3>
 
 
-	  <br/>
-    <input type="email" id="email" placeholder="Enter email" name = "email" required/ size=25%>
+    <br/>
+    <input type="username" id="username" placeholder="Enter username" name = "username" required/ size=25%>
     <br/>
     <input type="password" id="password" placeholder="Enter password" name = "password" required/ size=25%>
     <br/>
     <br/>
-	  <button id="login" class="button">Login</button>
+    <input type="submit" name = "login" value = "Login" id="login">
     <a href="forgetPassword.php">forget password</a>
+    <br/>
+    <a href="registration.php">Create an account</a>
+    </br>
 
+TOP;
+$bot = "";
+
+if (isset($_POST["login"])) {
+  $_SESSION["username"] = $_POST["username"];
+  $_SESSION["password"] = $_POST["password"];
+  $passwordCheck = getPassword($_SESSION["username"]);
+  if (getUser($_SESSION["username"])) {
+    if ($_SESSION["password"] == $passwordCheck) {
+
+      header("Location: main.php");
+    } else {
+  $bot .= <<<BOT
+    <strong>Username or password is incorrect</strong>
+BOT;
+    }
+
+  } else {
+  $bot .= <<<BOT
+    <strong>Username or password is incorrect</strong> <br>
+BOT;
+
+  }
+
+}
+
+echo $top;
+echo $bot;
+echo "</form>";
+?>
 </body>
 </html>
