@@ -21,15 +21,22 @@ require_once('database.php');
 <nav class="navbar navbar-expand-sm fixed-top bg-dark navbar-dark">
   <a class="navbar-brand" href="main.html">LogoGoesHere</a>
   <div class="collapse navbar-collapse justify-content-end">
-    <ul class="navbar-nav">
+  
+
+	<ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Order Online</a>
+        <a class="nav-link" href="takeOutOrder.html">Order Online</a>
       </li>
+	    <?php
+			if($_SESSION['loggedIn'] === "yes") {
+				echo "<li class='nav-item'><a class='nav-link' href='profile.php'>Order Online</a></li>";
+			}
+		?>
       <li class="nav-item">
         <a class="nav-link" href="#">About</a>
       </li>
 	  <li class="nav-item">
-			<a class="nav-link" href="#"><span class="fas fa-sign-in-alt"></span> Login</a>
+			<a class="nav-link" href="login.php"><span class="fas fa-sign-in-alt"></span> Login</a>
 	  </li>
 	</ul>
   </div> 
@@ -94,37 +101,6 @@ require_once('database.php');
 	</div>
   </div>
 </div>
-	
-
-
-	<!-- Modals -->
-	
-	
- <!-- The Modal -->
-  <div class="modal" id="menuOption1Modal">
-    <div class="modal-dialog">
-      <div class="modal-content">
-      
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <h4 class="modal-title">Modal Heading</h4>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        
-        <!-- Modal body -->
-        <div class="modal-body">
-          Modal body..
-        </div>
-        
-        <!-- Modal footer -->
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        </div>
-        
-     </div>
-  </div>
-</div>
-  
 </body>
 </html>
 

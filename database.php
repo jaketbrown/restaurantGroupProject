@@ -2,8 +2,8 @@
 session_start();
 
 $host = "localhost";
-$user = "root";
-$password = "";
+$user = "dbuser";
+$password = "goodbyeWorld";
 $database = "mydb";
 $db = mysqli_connect($host, $user, $password, $database) or die("failed to connect to db");
 
@@ -16,7 +16,7 @@ function register($username, $password, $email) {
 		echo mysqli_error($db);
 	} else {
 		$_SESSION['username'] = $username;
-		header('Location: main.php');
+		header('Location: main.php');	
 	}
 	mysqli_close($db);
 }
@@ -28,10 +28,10 @@ function getUserInfo($username) {
 	if(!$result) {
 		echo mysqli_error($db);
 	} else {
-		while ($mysql_array = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-			$_SESSION['name'] = $mysql_array['name'];
-			$_SESSION['email'] = $mysql_array['email'];
-			$_SESSION['profilepic'] = $mysql_array['profilepic'];
+		while ($mysql_array = mysqli_fetch_array($result, MYSQLI_ASSOC)) { 
+			$_SESSION['name'] = $mysql_array['name']; 
+			$_SESSION['email'] = $mysql_array['email']; 
+			$_SESSION['profilepic'] = $mysql_array['profilepic']; 
 			$_SESSION['bio'] = $mysql_array['bio'];
 	    }
 		if ($_SESSION['profilepic'] === "") { //default image;
@@ -49,7 +49,7 @@ function changeProfilePic($username, $profilepic) {
 		echo mysqli_error($db);
 	} else {
 		$_SESSION['profilepic'] = $profilepic;
-		header('Location: profile.php');
+		header('Location: profile.php');	
 	}
 	mysqli_close($db);
 }
@@ -62,7 +62,7 @@ function changeEmail($username, $email) {
 		echo mysqli_error($db);
 	} else {
 		$_SESSION['email'] = $profilepic;
-		header('Location: profile.php');
+		header('Location: profile.php');	
 	}
 	mysqli_close($db);
 }
@@ -77,7 +77,7 @@ function changeBio($username, $bio) {
 	}
 	else {
 		$_SESSION['bio'] = $bio;
-		header('Location: profile.php');
+		header('Location: profile.php');		
 	}
 	mysqli_close($db);
 }
@@ -92,10 +92,23 @@ function changePassword($username, $password) {
 	}
 	else {
 		$_SESSION['password'] = $password;
-		header('Location: profile.php');
+		header('Location: profile.php');		
 	}
 	mysqli_close($db);
 }
 
-
+function getPassword($username) {
+	global $db;
+	$sql = sprintf("SELECT password FROM users WHERE username='%s'", $username);
+    $result = mysqli_query($db, $sql);
+	if(!$result) {
+		echo mysqli_error($db);
+	}
+	else {
+		while ($mysql_array = mysqli_fetch_array($result, MYSQLI_ASSOC)) { 
+			return $mysql_array['password'];
+	    }
+	}
+	mysqli_close($db);
+}
 ?>
