@@ -112,7 +112,7 @@ $email = $_SESSION['email'];
                                             <label><Strong>Change Password:</Strong></label>
                                         </div>
                                         <div class="col-md-6">
-											<input type="text" id="changePassword"></input>
+											<input type="text" id="changePassword" name="changePassword"></input>
                                         </div>
                                     </div>
 									<br/>
@@ -121,16 +121,16 @@ $email = $_SESSION['email'];
                                             <label><Strong>Confirm Password:</Strong></label>
                                         </div>
                                         <div class="col-md-6">
-											<input type="text" id="confirmChangePassword"></input>
+											<input type="text" id="confirmChangePassword" name="confirmChangePassword"></input>
                                         </div>
                                     </div>
 									<br/>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label><Strong>Email:</Strong></label>
+                                            <label><Strong>Change Email:</Strong></label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="email" id="changeEmail"></input>
+                                            <input type="email" id="changeEmail" name="changeEmail"></input>
                                         </div>
                                     </div>
 									<br/>
@@ -139,19 +139,19 @@ $email = $_SESSION['email'];
                                             <label><Strong>Change Picture:</Strong></label>
 										</div>
 										<div class="col-md-4">
-											<input class="btn" type="file" id="changePic"/>
+											<input class="btn" type="file" id="changePic" name="changePic"/>
 										</div>
 									</div>
 									<br/>
 									<div class="row">
 										<div class="col-md-12">
 											<label><Strong>Your Bio:</Strong></label><br/>
-											<textarea type="text" rows="5" cols="50" id="changeBio"></textarea>
+											<textarea type="text" rows="5" cols="50" id="changeBio" name="changeBio"></textarea>
 										</div>
 									</div>
 									<br/>
 
-											<button id="saveProfile">Save Profile</button>
+											<button type="submit" id="saveProfile" name="saveProfile">Save Profile</button>
 									</form>
 								</div>
 							</div>
@@ -166,20 +166,33 @@ $email = $_SESSION['email'];
 
 
 <?php
-	if(isset($_POST['changePic'])) {
+
+
+if (isset($_POST['saveProfile'])) {
+	
+	/*if(isset($_POST['changePic']) && $_POST['changePic'] != "") {
+		echo "here1";
 		changeProfilePic($_SESSION['username'], $_POST['changePic']);
 	}
-	if(isset($_POST['changeBio'])) {
+	if(isset($_POST['changeBio']) && $_POST['changeBio'] != "") {
 		changeBio($_SESSION['username'], $_POST['changeBio']);
+	}*/
+	
+	if(isset($_POST['changeEmail']) && $_POST['changeEmail'] != "") {
+		$username = trim($_SESSION['username']);
+		$email = trim($_POST['changeEmail']);
+		changeEmail($username, $email);
 	}
 	
-	if(isset($_POST['changePassword']) && isset($_POST['changeConfirmPassword'])) {
+	
+	/*if(isset($_POST['changePassword']) && isset($_POST['changeConfirmPassword']) && $_POST['changePassword'] != "" && $_POST['changeConfirmPassword']) {
 		if($_POST['changePassword'] === $_POST['changeConfirmPassword']) {
 			changePassword($_SESSION['username'], $_POST['changePassword']);
 		} else {
 			echo "<script>alert('Passwords must match');</script>";
 		}
-	}
+	}*/
+}
 	
 	
 ?>

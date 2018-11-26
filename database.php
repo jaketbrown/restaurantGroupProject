@@ -59,9 +59,12 @@ function changeEmail($username, $email) {
 	$sql = sprintf("UPDATE users SET email='%s' WHERE username='%s'", $email, $username);
     $result = mysqli_query($db, $sql);
 	if(!$result) {
+		echo $username;
+		echo $email;
+		echo "fail";
 		echo mysqli_error($db);
 	} else {
-		$_SESSION['email'] = $profilepic;
+		$_SESSION['email'] = $email;
 		header('Location: profile.php');
 	}
 	mysqli_close($db);
