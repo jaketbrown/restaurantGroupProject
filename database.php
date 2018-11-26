@@ -2,8 +2,8 @@
 session_start();
 
 $host = "localhost";
-$user = "root";
-$password = "";
+$user = "dbuser";
+$password = "goodbyeWorld";
 $database = "mydb";
 $db = mysqli_connect($host, $user, $password, $database) or die("failed to connect to db");
 

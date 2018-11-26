@@ -7,15 +7,12 @@ $bio = $_SESSION['bio'];
 $profilepic = $_SESSION['profilepic'];
 $email = $_SESSION['email'];
 
-
-
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>CMSC389N</title>
+  <title>Kalimotxo</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- CDN to Bootstrap 4.1.3, Fontawesome 5.5, Jquery 3.3.1 -->
@@ -28,17 +25,17 @@ $email = $_SESSION['email'];
 </head>
 <body>
 <nav class="navbar navbar-expand-sm fixed-top bg-dark navbar-dark">
-  <a class="navbar-brand" href="main.html">LogoGoesHere</a>
+  <a class="navbar-brand" href="main.php">Kalimotxo</a>
   <div class="collapse navbar-collapse justify-content-end">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Order Online</a>
+        <a class="nav-link" href="takeOutOrder.html">Order Online</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="main.php">About</a>
       </li>
 	  <li class="nav-item">
-			<a class="nav-link" href="#"><span class="fas fa-sign-out-alt"></span> Logout</a>
+			<a class="nav-link" href="main.php"><span class="fas fa-sign-out-alt"></span> Logout</a>
 	  </li>
 	</ul>
   </div> 
@@ -52,11 +49,8 @@ $email = $_SESSION['email'];
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src="<?php echo $pic;?>" alt="" width="300" height="300" />
-                            <div>
-                               <input type="file"/>
-                            </div>
                         </div>
-                    </div>
+                    </div>		
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
@@ -67,69 +61,125 @@ $email = $_SESSION['email'];
                                     <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile">Bio</a>
-                                </li>
-								 <li class="nav-item">
-                                    <a class="nav-link" id="edit-profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile">Edit Profile</a>
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile">Edit</a>
                                 </li>
                             </ul>
                         </div>
-                    
+						<br/>
 					
-						<div class="col-md-8" style="border: 1px solid black">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>User Name</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>TBD</p>
-                                            </div>
+						<div class="col-md-8">
+							<div class="tab-content profile-tab" id="myTabContent">
+								<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label><Strong>User Name:</Strong></label>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Name</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>TBD</p>
-                                            </div>
+                                        <div class="col-md-6">
+                                            <p><?php echo $_SESSION['username'];?></p>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>Email</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <p>fake@gmail.com</p>
-                                            </div>
+                                    </div>
+									<br/>
+									<div class="row">
+										<div class="col-md-6">
+                                            <label><Strong>Name:</Strong></label>
                                         </div>
-                            </div>
+                                        <div class="col-md-6">
+											<p><?php echo $name;?></p>
+                                        </div>
+                                    </div>
+									<br/>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label><Strong>Email:</Strong></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p><?php echo $email;?></p>
+                                        </div>
+                                    </div>
+									<br/>
+									<div class="row">
+										<div class="col-md-12">
+											<label><Strong>Your Bio:</Strong></label><br/>
+											<p><?php echo $bio;?></p>
+										</div>
+									</div>
+								</div>
+														
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
+								<form action=<?php echo $_SERVER['PHP_SELF'];?> method="post"> 
+									<div class="row">
+										<div class="col-md-6">
+                                            <label><Strong>Change Password:</Strong></label>
+                                        </div>
+                                        <div class="col-md-6">
+											<input type="text" id="changePassword"></input>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-							
-							<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
-										<button class="btn" value="test"></button>
+									<br/>
+									<div class="row">
+										<div class="col-md-6">
+                                            <label><Strong>Confirm Password:</Strong></label>
+                                        </div>
+                                        <div class="col-md-6">
+											<input type="text" id="confirmChangePassword"></input>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-							
-							
-                        </div>
-                    </div>
-                </div>         
+									<br/>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label><Strong>Email:</Strong></label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="email" id="changeEmail"></input>
+                                        </div>
+                                    </div>
+									<br/>
+									<div class="row">
+										<div class="col-md-6">
+                                            <label><Strong>Change Picture:</Strong></label>
+										</div>
+										<div class="col-md-4">
+											<input class="btn" type="file" id="changePic"/>
+										</div>
+									</div>
+									<br/>
+									<div class="row">
+										<div class="col-md-12">
+											<label><Strong>Your Bio:</Strong></label><br/>
+											<textarea type="text" rows="5" cols="50" id="changeBio"></textarea>
+										</div>
+									</div>
+									<br/>
+
+											<button id="saveProfile">Save Profile</button>
+									</form>
+								</div>
+							</div>
+						</div> 
+					</div>
 				</div>
-        </div>
-		</div>
+			</div>
         </div>
 	</body>
 </html>
+
+
+
+<?php
+	if(isset($_POST['changePic'])) {
+		changeProfilePic($_SESSION['username'], $_POST['changePic']);
+	}
+	if(isset($_POST['changeBio'])) {
+		changeBio($_SESSION['username'], $_POST['changeBio']);
+	}
+	
+	if(isset($_POST['changePassword']) && isset($_POST['changeConfirmPassword'])) {
+		if($_POST['changePassword'] === $_POST['changeConfirmPassword']) {
+			changePassword($_SESSION['username'], $_POST['changePassword']);
+		} else {
+			echo "<script>alert('Passwords must match');</script>";
+		}
+	}
+	
+	
+?>
