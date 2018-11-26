@@ -33,52 +33,17 @@
 
 	<!-- 1st row -->
     <div class="col-sm-6">
-      <h4><em>Please enter your email</em></h3>
+      <h4><em>Login</em></h3>
 
 
 	  <br/>
     <input type="email" id="email" placeholder="Enter email" name = "email" required/ size=25%>
     <br/>
-    <input type="email" id="confirmEmail" placeholder="Confirm email" name = "confirmEmail" required/ size=25%>
+    <input type="password" id="password" placeholder="Enter password" name = "password" required/ size=25%>
     <br/>
     <br/>
-	  <button id="change" class="button" onclick=changePassword()>Submit</button>
-    <br/>
-    <br/>
-    <button id="change" class="button" onclick="location.href='login.html'">Login</button>
+	  <button id="login" class="button">Login</button>
+    <a href="forgetPassword.php">forget password</a>
 
-<script>
-  function changePassword() {
-
-    var email1 = document.getElementById("email");
-    var email2 = document.getElementById("confirmEmail");
-    if (checkEmail()) {
-      if (email1.value == email2.value ) {
-        email1.placeholder="New password";
-        email1.id="newPassword";
-        email1.value="";
-        email2.placeholder="Confirm password";
-        email2.id="confirmNewPassword";
-        email2.value="";
-      } else {
-        alert("Email must match");
-      }
-    }
-  }
-
-  function checkEmail() {
-    var email1 = document.getElementById("email");
-    var email2 = document.getElementById("confirmEmail");
-    if (email1.value == "") {
-      alert("Please enter an email");
-      return false;
-    } else if (email2.value == "") {
-      alert("Please confirm your email");
-      return false;
-    } else {
-      return true;
-    }
-  }
-</script>
 </body>
 </html>
