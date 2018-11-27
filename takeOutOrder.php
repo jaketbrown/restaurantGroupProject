@@ -115,7 +115,12 @@
 			<a class="nav-link" href="about.php">About</a>
 		  </li>
 			<li class="nav-item">
-        <a class="nav-link" href="profile.php">My Profile</a>
+				<?php if ($_SESSION["loggedIn"] == true) {
+          echo "<a class=\"nav-link\" href=\"profile.php\">My Profile</a>";
+        } else {
+          echo "<a class=\"nav-link\" href=\"login.php\">My Profile</a>";
+        }
+        ?>
       </li>
 		  <li class="nav-item">
 				<?php if ($_SESSION["loggedIn"] == true) {
