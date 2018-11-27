@@ -86,17 +86,17 @@ require_once('database.php');
 
 		<tr>
 			<td>Quesadillas</td>
-			<td>$7.99</td>
+			<td>$18</td>
 			<td><img src="quesadilla.jpg" style="width:300px;height:300px;"></td>
 		</tr>
 		<tr>
 			<td>Paella</td>
-			<td>$10.99</td>
+			<td>$14</td>
 			<td><img src="paella1.jpg" style="width:300px;height:300px;"></td>
 		</tr>
 		<tr>
 			<td>Burritos</td>
-			<td>$6.99</td>
+			<td>$15</td>
 			<td><img src="burritos.jpg" style="width:300px;height:300px;"></td>
 		</tr>
 
@@ -107,17 +107,17 @@ require_once('database.php');
 
 		<tr>
 			<td>Tacos</td>
-			<td>$4.99</td>
+			<td>$13</td>
 			<td><img src="tacos.jpg" style="width:300px;height:300px;"></td>
 		</tr>
 		<tr>
 			<td>Spanish Omelette</td>
-			<td>$3.99</td>
+			<td>$20</td>
 			<td><img src="spanishomelette.jpg" style="width:300px;height:300px;"></td>
 		</tr>
 		<tr>
 			<td>Nachos</td>
-			<td>$5.99</td>
+			<td>$15</td>
 			<td><img src="nachos.jpg" style="width:300px;height:300px;"></td>
 		</tr>
 
