@@ -1,13 +1,48 @@
 <?php
-require('database.php');
+require_once('database.php');
 
-getUserInfo($_SESSION['username']);
-$name = $_SESSION['name'];
-$bio = $_SESSION['bio'];
-$profilepic = $_SESSION['profilepic'];
-$email = $_SESSION['email'];
+if ($_SESSION["loggedIn"] == false) {
+
+    header("Location: login.php");
+}
+
+$arr = getUserInfo($_SESSION['username']);
+
+$name = $arr['name'];
+if (!$arr['profilepic']) {
+	$pic = "https://34yigttpdc638c2g11fbif92-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/default-user-img.jpg";
+} else {
+	$pic = $arr['profilepic'];
+}
+$bio = $arr['bio'];
+$email = $arr['email'];
+$flag = 0;
+if (isset($_POST['saveProfile'])) {
+	if(isset($_POST['changePic']) && $_POST['changePic'] != "") {
+		changeProfilePic($_SESSION['username'], $_POST['changePic']);
+	}
+	if(isset($_POST['changeBio']) && $_POST['changeBio'] != "") {
+		changeBio($_SESSION['username'], $_POST['changeBio']);
+	}
+	if(isset($_POST['changeEmail']) && $_POST['changeEmail'] != "") {
+		changeEmail($_SESSION['username'], $_POST['changeEmail']);
+	}
+	if(isset($_POST['changePassword']) && isset($_POST['confirmChangePassword']) && $_POST['changePassword'] != "" && $_POST['confirmChangePassword'] != "") {
+		if($_POST['changePassword'] === $_POST['confirmChangePassword']) {
+			changePassword($_SESSION['username'], $_POST['changePassword']);
+		} else {
+			$flag = 1;
+			echo "<script>alert('Passwords must match');</script>";
+		}
+	}
+	if($flag == 0) {
+		header("Location: profile.php");
+	}
+}
+
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,19 +59,24 @@ $email = $_SESSION['email'];
   <script src="menu.js"></script>
 </head>
 <body>
+
 <nav class="navbar navbar-expand-sm fixed-top bg-dark navbar-dark">
-  <a class="navbar-brand" href="main.php">Kalimotxo</a>
+  <a class="navbar-brand" href="about.php">Kalimotxo</a>
   <div class="collapse navbar-collapse justify-content-end">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="takeOutOrder.html">Order Online</a>
+        <a class="nav-link" href="takeOutOrder.php">Order Online</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="main.php">About</a>
+        <a class="nav-link" href="about.php">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="profile.php">My Profile</a>
       </li>
 	  <li class="nav-item">
-			<a class="nav-link" href="main.php"><span class="fas fa-sign-out-alt"></span> Logout</a>
+      <a class="nav-link" href="login.php"><span class="fas fa-sign-in-alt"></span> Logout</a>"
 	  </li>
+
 	</ul>
   </div>
 </nav>
@@ -44,11 +84,12 @@ $email = $_SESSION['email'];
 <br/>
 <br/>
 <br/>
+<form action=<?php echo $_SERVER['PHP_SELF'];?> method="post">
 <div class="container">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="<?php echo $pic;?>" alt="" width="300" height="300" />
+                            <img src="https://34yigttpdc638c2g11fbif92-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/default-user-img.jpg" alt="" width="300" height="300" />
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -106,7 +147,7 @@ $email = $_SESSION['email'];
 								</div>
 
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-								<form action=<?php echo $_SERVER['PHP_SELF'];?> method="post">
+
 									<div class="row">
 										<div class="col-md-6">
                                             <label><Strong>Change Password:</Strong></label>
@@ -162,39 +203,3 @@ $email = $_SESSION['email'];
         </div>
 	</body>
 </html>
-
-
-
-<?php
-
-
-if (isset($_POST['saveProfile'])) {
-
-	/*if(isset($_POST['changePic']) && $_POST['changePic'] != "") {
-		echo "here1";
-		changeProfilePic($_SESSION['username'], $_POST['changePic']);
-	}
-	if(isset($_POST['changeBio']) && $_POST['changeBio'] != "") {
-		changeBio($_SESSION['username'], $_POST['changeBio']);
-	}*/
-
-	if(isset($_POST['changeEmail'])) {
-		$username = trim($_SESSION['username']);
-		$email = trim($_POST['changeEmail']);
-
-		// changeEmail($username, $email);
-    echo $username;
-	}
-
-
-	/*if(isset($_POST['changePassword']) && isset($_POST['changeConfirmPassword']) && $_POST['changePassword'] != "" && $_POST['changeConfirmPassword']) {
-		if($_POST['changePassword'] === $_POST['changeConfirmPassword']) {
-			changePassword($_SESSION['username'], $_POST['changePassword']);
-		} else {
-			echo "<script>alert('Passwords must match');</script>";
-		}
-	}*/
-}
-
-
-?>
