@@ -1,13 +1,43 @@
 <?php
-require('database.php');
+require_once('database.php');
 
-getUserInfo($_SESSION['username']);
-$name = $_SESSION['name'];
-$bio = $_SESSION['bio'];
-$profilepic = $_SESSION['profilepic'];
-$email = $_SESSION['email'];
+$arr = getUserInfo($_SESSION['username']);
+
+$name = $arr['name'];
+if (!$arr['profilepic']) {
+	$pic = "https://34yigttpdc638c2g11fbif92-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/default-user-img.jpg";
+} else {
+	$pic = $arr['profilepic'];
+}
+$bio = $arr['bio'];
+$email = $arr['email'];
+$flag = 0;
+if (isset($_POST['saveProfile'])) {
+	if(isset($_POST['changePic']) && $_POST['changePic'] != "") {
+		changeProfilePic($_SESSION['username'], $_POST['changePic']);
+	}
+	if(isset($_POST['changeBio']) && $_POST['changeBio'] != "") {
+		changeBio($_SESSION['username'], $_POST['changeBio']);
+	}
+	if(isset($_POST['changeEmail']) && $_POST['changeEmail'] != "") {
+		changeEmail($_SESSION['username'], $_POST['changeEmail']);
+	}
+	if(isset($_POST['changePassword']) && isset($_POST['confirmChangePassword']) && $_POST['changePassword'] != "" && $_POST['confirmChangePassword'] != "") {
+		if($_POST['changePassword'] === $_POST['confirmChangePassword']) {
+			changePassword($_SESSION['username'], $_POST['changePassword']);
+		} else {
+			$flag = 1;
+			echo "<script>alert('Passwords must match');</script>";
+		}
+	}
+	if($flag == 0) {
+		header("Location: profile.php");
+	}	
+}
+
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,7 +78,7 @@ $email = $_SESSION['email'];
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="<?php echo $pic;?>" alt="" width="300" height="300" />
+                            <img src="https://34yigttpdc638c2g11fbif92-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/default-user-img.jpg" alt="" width="300" height="300" />
                         </div>
                     </div>		
                     <div class="col-md-6">
@@ -164,35 +194,3 @@ $email = $_SESSION['email'];
 </html>
 
 
-
-<?php
-
-
-if (isset($_POST['saveProfile'])) {
-	
-	/*if(isset($_POST['changePic']) && $_POST['changePic'] != "") {
-		echo "here1";
-		changeProfilePic($_SESSION['username'], $_POST['changePic']);
-	}
-	if(isset($_POST['changeBio']) && $_POST['changeBio'] != "") {
-		changeBio($_SESSION['username'], $_POST['changeBio']);
-	}*/
-	
-	if(isset($_POST['changeEmail']) && $_POST['changeEmail'] != "") {
-		$username = trim($_SESSION['username']);
-		$email = trim($_POST['changeEmail']);
-		changeEmail($username, $email);
-	}
-	
-	
-	/*if(isset($_POST['changePassword']) && isset($_POST['changeConfirmPassword']) && $_POST['changePassword'] != "" && $_POST['changeConfirmPassword']) {
-		if($_POST['changePassword'] === $_POST['changeConfirmPassword']) {
-			changePassword($_SESSION['username'], $_POST['changePassword']);
-		} else {
-			echo "<script>alert('Passwords must match');</script>";
-		}
-	}*/
-}
-	
-	
-?>

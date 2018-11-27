@@ -15,7 +15,6 @@ function register($username, $password, $email, $name) {
 	if(!$result) {
 		echo mysqli_error($db);
 	} else {
-		// $_SESSION['username'] = $username;
 		header('Location: main.php');
 	}
 	mysqli_close($db);
@@ -28,15 +27,9 @@ function getUserInfo($username) {
 	if(!$result) {
 		echo mysqli_error($db);
 	} else {
-		while ($mysql_array = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-			$_SESSION['name'] = $mysql_array['name'];
-			$_SESSION['email'] = $mysql_array['email'];
-			$_SESSION['profilepic'] = $mysql_array['profilepic'];
-			$_SESSION['bio'] = $mysql_array['bio'];
-	    }
-		if ($_SESSION['profilepic'] === "") { //default image;
-			$_SESSION['profilepic'] == "https://34yigttpdc638c2g11fbif92-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/default-user-img.jpg";
-		}
+		$mysql_array = mysqli_fetch_array($result, MYSQLI_ASSOC);
+		return $mysql_array;
+		
 	}
 	mysqli_close($db);
 }
@@ -48,24 +41,21 @@ function changeProfilePic($username, $profilepic) {
 	if(!$result) {
 		echo mysqli_error($db);
 	} else {
-		$_SESSION['profilepic'] = $profilepic;
-		header('Location: profile.php');
+		return true;
 	}
 	mysqli_close($db);
 }
 
 function changeEmail($username, $email) {
 	global $db;
+
 	$sql = sprintf("UPDATE users SET email='%s' WHERE username='%s'", $email, $username);
-    $result = mysqli_query($db, $sql);
+	$result = mysqli_query($db, $sql);
 	if(!$result) {
-		echo $username;
-		echo $email;
-		echo "fail";
 		echo mysqli_error($db);
+
 	} else {
-		$_SESSION['email'] = $email;
-		header('Location: profile.php');
+		return true;
 	}
 	mysqli_close($db);
 }
@@ -79,8 +69,7 @@ function changeBio($username, $bio) {
 		echo mysqli_error($db);
 	}
 	else {
-		$_SESSION['bio'] = $bio;
-		header('Location: profile.php');
+		return true;
 	}
 	mysqli_close($db);
 }
@@ -94,9 +83,9 @@ function changePassword($username, $password) {
 		echo mysqli_error($db);
 	}
 	else {
-		$_SESSION['password'] = $password;
-		header('Location: profile.php');
+		return true;
 	}
+
 	mysqli_close($db);
 }
 
