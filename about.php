@@ -27,17 +27,17 @@ require_once('database.php');
 
 <body>
 <nav class="navbar navbar-expand-sm fixed-top bg-dark navbar-dark">
-  <a class="navbar-brand" href="main.html">LogoGoesHere</a>
+  <a class="navbar-brand" href="about.php">Kalimotxo</a>
   <div class="collapse navbar-collapse justify-content-end">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="#">Order Online</a>
+        <a class="nav-link" href="takeOutOrder.html">Order Online</a>
       </li>
       <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="about.php">About</a>
       </li>
 	  <li class="nav-item">
-			<a class="nav-link" href="#"><span class="fas fa-sign-in-alt"></span> Login</a>
+			<a class="nav-link" href="login.php"><span class="fas fa-sign-in-alt"></span> Login</a>
 	  </li>
 	</ul>
   </div>
@@ -141,7 +141,7 @@ require_once('database.php');
 	 <p>Contact us for franchising and other business opportunities!</p>
 	 <a href="tel:+1-123-456-7890">Call us!</a> <br>
 	 <a href = "mailto: Kalimotxo@gmail.com">Email Us!	</a>
-
+	 <br>
     	
 </div>
 
