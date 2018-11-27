@@ -27,7 +27,7 @@ require_once('database.php');
 
 <body>
 <nav class="navbar navbar-expand-sm fixed-top bg-dark navbar-dark">
-  <a class="navbar-brand" href="main.html">LogoGoesHere</a>
+  <a class="navbar-brand" href="about.php">Kalimotxo</a>
   <div class="collapse navbar-collapse justify-content-end">
     <ul class="navbar-nav">
       <li class="nav-item">
