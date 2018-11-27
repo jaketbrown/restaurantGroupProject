@@ -2,8 +2,8 @@
 session_start();
 
 $host = "localhost";
-$user = "dbuser";
-$password = "goodbyeWorld";
+$user = "root";
+$password = "";
 $database = "mydb";
 $db = mysqli_connect($host, $user, $password, $database) or die("failed to connect to db");
 
@@ -56,12 +56,11 @@ function changeProfilePic($username, $profilepic) {
 
 function changeEmail($username, $email) {
 	global $db;
+
 	$sql = sprintf("UPDATE users SET email='%s' WHERE username='%s'", $email, $username);
-    $result = mysqli_query($db, $sql);
+		$result = mysqli_query($db, $sql);
 	if(!$result) {
-		echo $username;
-		echo $email;
-		echo "fail";
+		
 		echo mysqli_error($db);
 	} else {
 		$_SESSION['email'] = $email;

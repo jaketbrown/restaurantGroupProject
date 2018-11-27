@@ -38,7 +38,7 @@ $email = $_SESSION['email'];
 			<a class="nav-link" href="main.php"><span class="fas fa-sign-out-alt"></span> Logout</a>
 	  </li>
 	</ul>
-  </div> 
+  </div>
 </nav>
 <br/>
 <br/>
@@ -50,7 +50,7 @@ $email = $_SESSION['email'];
                         <div class="profile-img">
                             <img src="<?php echo $pic;?>" alt="" width="300" height="300" />
                         </div>
-                    </div>		
+                    </div>
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
@@ -66,7 +66,7 @@ $email = $_SESSION['email'];
                             </ul>
                         </div>
 						<br/>
-					
+
 						<div class="col-md-8">
 							<div class="tab-content profile-tab" id="myTabContent">
 								<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -104,9 +104,9 @@ $email = $_SESSION['email'];
 										</div>
 									</div>
 								</div>
-														
+
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-								<form action=<?php echo $_SERVER['PHP_SELF'];?> method="post"> 
+								<form action=<?php echo $_SERVER['PHP_SELF'];?> method="post">
 									<div class="row">
 										<div class="col-md-6">
                                             <label><Strong>Change Password:</Strong></label>
@@ -155,7 +155,7 @@ $email = $_SESSION['email'];
 									</form>
 								</div>
 							</div>
-						</div> 
+						</div>
 					</div>
 				</div>
 			</div>
@@ -169,7 +169,7 @@ $email = $_SESSION['email'];
 
 
 if (isset($_POST['saveProfile'])) {
-	
+
 	/*if(isset($_POST['changePic']) && $_POST['changePic'] != "") {
 		echo "here1";
 		changeProfilePic($_SESSION['username'], $_POST['changePic']);
@@ -177,14 +177,16 @@ if (isset($_POST['saveProfile'])) {
 	if(isset($_POST['changeBio']) && $_POST['changeBio'] != "") {
 		changeBio($_SESSION['username'], $_POST['changeBio']);
 	}*/
-	
-	if(isset($_POST['changeEmail']) && $_POST['changeEmail'] != "") {
+
+	if(isset($_POST['changeEmail'])) {
 		$username = trim($_SESSION['username']);
 		$email = trim($_POST['changeEmail']);
-		changeEmail($username, $email);
+
+		// changeEmail($username, $email);
+    echo $username;
 	}
-	
-	
+
+
 	/*if(isset($_POST['changePassword']) && isset($_POST['changeConfirmPassword']) && $_POST['changePassword'] != "" && $_POST['changeConfirmPassword']) {
 		if($_POST['changePassword'] === $_POST['changeConfirmPassword']) {
 			changePassword($_SESSION['username'], $_POST['changePassword']);
@@ -193,6 +195,6 @@ if (isset($_POST['saveProfile'])) {
 		}
 	}*/
 }
-	
-	
+
+
 ?>
