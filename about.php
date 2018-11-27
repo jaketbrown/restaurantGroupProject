@@ -76,7 +76,7 @@ require_once('database.php');
 			<td><img src="quesadilla.jpg" style="width:300px;height:300px;"></td>
 		</tr>
 		<tr>
-			<td>Paelaa</td>
+			<td>Paella</td>
 			<td>$10.99</td>
 			<td><img src="paella1.jpg" style="width:300px;height:300px;"></td>
 		</tr>
