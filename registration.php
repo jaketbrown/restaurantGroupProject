@@ -47,20 +47,20 @@ $top = <<<TOP
 
   <legend>Register</legend>
 
-  <label for='rName' >Your Full Name: </label>
-  <input type='text' name='rName' id='rName' maxlength="50" />
+  <label for='rName' style="margin-right: 23px;">Your Full Name: </label>
+  <input type='text' name='rName' id='rName' maxlength="50" stye="margin-left: 8px;"/>
   <br>
-  <label for='rEmail' >Email Address:</label>
-  <input type='text' name='rEmail' id='rEmail' maxlength="50" />
+  <label for='rEmail' style="margin-right: 23px;">Email Address:</label>
+  <input type='text' name='rEmail' id='rEmail' maxlength="50" style="margin-left: 8px;"/>
   <br>
-  <label for='rUsername' >Username:</label>
-  <input type='text' name='rUsername' id='rUsername' maxlength="50" />
+  <label for='rUsername' style="margin-right: 50px;">Username:</label>
+  <input type='text' name='rUsername' id='rUsername' maxlength="50"  style="margin-left: -;padding-left: 0px;margin-left: 8px"/>
   <br>
-  <label for='rPassword' >Password:</label>
-  <input type='password' name='rPassword' id='rPassword' maxlength="50" />
+  <label for='rPassword' style="margin-right: 55px;">Password:</label>
+  <input type='password' name='rPassword' id='rPassword' maxlength="50" style="margin-left:8px;"/>
   <br>
-  <label for='rConPassword' >Confirm Password:</label>
-  <input type='password' name='rConPassword' id='rConPassword' maxlength="50" />
+  <label for='rConPassword' style="margin-right: 2px;">Confirm Password:</label>
+  <input type='password' name='rConPassword' id='rConPassword' maxlength="50" style="margin-left: -;"/>
   <br>
   <input type='submit' name='submit' value='Submit' />
   </fieldset>

@@ -150,7 +150,7 @@
 			&nbsp;&nbsp;&nbsp;
 			<form method="post" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>>
 				<input type="hidden" id="orderArr" name="orderArr"></input>
-				<input type="submit" value="Place Order"></input>
+				<input type="submit" id="placeOrder" value="Place Order"></input>
 			</form>
 		</div>
 	  </div>
@@ -163,11 +163,11 @@
 
 	<div class="row">
 	  <div class="column">
-		<img src="burrito.jpg" alt="Burrito" id="burrito" style="width:100%">
+		<img src="burritos.jpg" alt="Burrito" id="burrito" style="width:100%">
 	  </div>
 
 	  <div class="column">
-		<img src="taco.png" alt="Taco" id="taco" style="width:100%;">
+		<img src="tacos.jpg" alt="Taco" id="taco" style="width:100%; height: 75%">
 	  </div>
 
 	  <div class="column">
@@ -222,11 +222,11 @@
 
 <div class="row">
 	<div class="column">
-	<img src="paella.jpeg" alt="Paella" id="paella" style="width:100%">
+	<img src="paella1.jpg" alt="Paella" id="paella" style="width:100%">
 	</div>
 
 	<div class="column">
-	<img src="nachos.jpg" alt="Nachos" id="nachos" style="width:100%;">
+	<img src="nachos.jpg" alt="Nachos" id="nachos" style="width:100%; height:92%">
 	</div>
 
 	<div class="column">
@@ -299,18 +299,32 @@
 		document.getElementById("pNA").addEventListener("click", function() {line(true, "numNA", "Nachos");});
 		document.getElementById("mSO").addEventListener("click", function() {line(false, "numSO", "Spanish Omelette");});
 		document.getElementById("pSO").addEventListener("click", function() {line(true, "numSO", "Spanish Omelette");});
+		document.getElementById("placeOrder").addEventListener("click", function() {alert("Order Placed");});
 	}
 
 
-@@ -298,13 +306,21 @@ <h5>Green Curry ($20)</h5>
-		}
+function line(adding, count, dish) {
+if (adding) {
+arr[count] += 1;
+} else {
+if (arr[count] > 0) {
+arr[count] -= 1;
+}
+}
+console.log(arr);
+if (arr[count] > 0) {
+document.getElementById(dish).innerHTML = "";
+document.getElementById(dish).innerHTML += "<p>" + dish + " x " + arr[count] + "<bR></pr>";
+} else {
+document.getElementById(dish).innerHTML = "";
+}
 
-		document.getElementById(count).innerHTML = arr[count];
-		let totalNum = arr["numBU"] * 15 + arr["numTA"] * 13 + arr["numQU"] * 18
-			+ arr["numPA"] * 14 + arr["numNA"] * 15 + arr["numSO"] * 20;
-		document.getElementById("total").innerHTML = "<h1>Total: $" + totalNum + "</h1>";
-		document.getElementById("orderArr").innerHTML = arr;
-	}
+document.getElementById(count).innerHTML = arr[count];
+
+let totalNum = arr["numBU"] * 15 + arr["numTA"] * 13 + arr["numQU"] * 18
++ arr["numPA"] * 14 + arr["numNA"] * 15 + arr["numSO"] * 20;
+document.getElementById("total").innerHTML = "<h1>Total: $" + totalNum + "</h1>";
+}
 </script>
 
 <?php

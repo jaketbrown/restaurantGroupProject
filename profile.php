@@ -70,15 +70,19 @@ $flag = 0;
                         <div class="profile-img">
                              <?php
 
-							displayImg($_SESSION['username']);
+							 
+								 
+							if(!displayImg($_SESSION['username'])) {
+								echo '<img src="https://34yigttpdc638c2g11fbif92-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/default-user-img.jpg" alt="unknown" width="300" height="300"/>';
+							}
 							?>
                         </div>	
-				<form method="post" enctype="multipart/form-data">  
+				<!--<form method="post" enctype="multipart/form-data">  
                      <input type="file" name="changePic" id="changePic" />  
                      <br />  
 					 <br />
                      <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-info" />  
-                </form>
+                </form>-->
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
@@ -173,6 +177,7 @@ $flag = 0;
 									<br/>
 
 											<button type="submit" id="saveProfile" name="saveProfile">Save Profile</button>
+											<input type="file" name="changePic" id="changePic" />  
 									</form>
 								</div>
 							</div>
@@ -208,17 +213,18 @@ $flag = 0;
 <?php
 
 
+/*
 if(isset($_POST["insert"])) {
-	if($_FILES['changePic']['tmp_name']) {
-		$file = $_FILES['changePic']['tmp_name'];
-	    changeProfilePic($_SESSION['username'], $file);
-		
-	}
+	
 }
+*/
 
 if (isset($_POST['saveProfile'])) {
 
+
+
 	$flag = 0;
+	
 	if(isset($_POST['changePassword']) && isset($_POST['confirmChangePassword']) && $_POST['changePassword'] != "" && $_POST['confirmChangePassword'] != "") {
 		if($_POST['changePassword'] === $_POST['confirmChangePassword']) {
 			changePassword($_SESSION['username'], $_POST['changePassword']);
@@ -226,6 +232,13 @@ if (isset($_POST['saveProfile'])) {
 			$flag = 1;
 			echo "<script>alert('Passwords must match');</script>";
 			
+		}
+	}
+
+	if($_FILES['changePic']['tmp_name']) {		
+		$file = $_FILES['changePic']['tmp_name'];	
+	    if ($flag == 0) {
+		changeProfilePic($_SESSION['username'], $file);
 		}
 	}
 	if(isset($_POST['changeBio']) && $_POST['changeBio'] != "") {
@@ -238,8 +251,7 @@ if (isset($_POST['saveProfile'])) {
 			changeEmail($_SESSION['username'], $_POST['changeEmail']);
 		}
 	}
+	echo '<script type="text/javascript">window.location.href = "profile.php";</script>';
+	
 }
-
-
-
 ?>

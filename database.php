@@ -114,7 +114,7 @@ function getUser($username) {
 	$sql = sprintf("SELECT username FROM users WHERE username='%s'", $username);
     $result = mysqli_query($db, $sql);
 	if(!$result) {
-
+		return false;
 	}
 	else {
 		while ($mysql_array = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
@@ -130,10 +130,11 @@ function displayImg($username) {
 	$sql = sprintf("SELECT profilepic FROM users WHERE username='%s'", $username);
 	$sth = $db->query($sql);
 	$result=mysqli_fetch_array($sth);
-	if(!$result) {
-	   echo '<img src="https://34yigttpdc638c2g11fbif92-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/default-user-img.jpg" alt="unknown" width="300" height="300"/>';
+	if($result['profilepic'] == "") {
+		return false;
 	} else {
 		echo '<img src="data:image/jpeg;base64,'.base64_encode( $result['profilepic'] ).'" width="300" height="300"/>';
+		return true;
 	}
 
 }

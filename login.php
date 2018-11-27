@@ -49,6 +49,7 @@ $top = <<<TOP
     <br/>
     <input type="username" id="username" placeholder="Enter username" name = "username" required/ size=25%>
     <br/>
+	<br/>
     <input type="password" id="password" placeholder="Enter password" name = "password" required/ size=25%>
     <br/>
     <br/>
