@@ -2,8 +2,8 @@
 session_start();
 
 $host = "localhost";
-$user = "root";
-$password = "";
+$user = "dbuser";
+$password = "goodbyeWorld";
 $database = "mydb";
 $db = mysqli_connect($host, $user, $password, $database) or die("failed to connect to db");
 
@@ -29,15 +29,15 @@ function getUserInfo($username) {
 	} else {
 		$mysql_array = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		return $mysql_array;
-
+		
 	}
 	mysqli_close($db);
 }
 
 function changeProfilePic($username, $profilepic) {
 	global $db;
-	$sql = sprintf("UPDATE users SET profilepic='%s' WHERE username='%s'", $profilepic, $username);
-    $result = mysqli_query($db, $sql);
+	$sql = sprintf("UPDATE users SET profilepic=%x WHERE username='%s'", $profilepic, $username);
+	$result = mysqli_query($db, $sql);
 	if(!$result) {
 		echo mysqli_error($db);
 	} else {
@@ -113,16 +113,32 @@ function getUser($username) {
 	}
 	else {
 		while ($mysql_array = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-			mysqli_close($db);
 			return true;
 	    }
-			mysqli_close($db);
 		return false;
 		// if(mysqli_fetch_array($result) != false)
 		// 	return true;
 		// return false;
 	}
-
-
+	mysqli_close($db);
 }
+
+function displayImg($username) {
+	global $db;
+	$sql = sprintf("SELECT profilepic FROM users WHERE username='%s'", $username);
+	$sth = $db->query($sql);
+	$result=mysqli_fetch_array($sth);
+	//if(result) {
+	   echo '<img src="https://34yigttpdc638c2g11fbif92-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/default-user-img.jpg" alt="unknown" width="300" height="300"/>';
+	//} else {
+	//	echo '<img src="data:image/jpeg;base64,'.base64_encode( $result['profilepic'] ).'"/>';
+	//}
+	
+}
+
+
 ?>
+
+
+
+

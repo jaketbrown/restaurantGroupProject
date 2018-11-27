@@ -1,15 +1,10 @@
 <?php
 require_once('database.php');
 
-if ($_SESSION["loggedIn"] == false) {
-
-    header("Location: login.php");
-}
-
 $arr = getUserInfo($_SESSION['username']);
 
 $name = $arr['name'];
-if (!$arr['profilepic']) {
+if ($arr['profilepic']) {
 	$pic = "https://34yigttpdc638c2g11fbif92-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/default-user-img.jpg";
 } else {
 	$pic = $arr['profilepic'];
@@ -18,8 +13,9 @@ $bio = $arr['bio'];
 $email = $arr['email'];
 $flag = 0;
 if (isset($_POST['saveProfile'])) {
-	if(isset($_POST['changePic']) && $_POST['changePic'] != "") {
-		changeProfilePic($_SESSION['username'], $_POST['changePic']);
+	if(isset($_POST['changePic'])) {
+		$file = addslashes(file_get_contents($_FILES["name"]["tmp_name"]));
+	    changeProfilePic($_SESSION['username'], $file);
 	}
 	if(isset($_POST['changeBio']) && $_POST['changeBio'] != "") {
 		changeBio($_SESSION['username'], $_POST['changeBio']);
@@ -31,15 +27,16 @@ if (isset($_POST['saveProfile'])) {
 		if($_POST['changePassword'] === $_POST['confirmChangePassword']) {
 			changePassword($_SESSION['username'], $_POST['changePassword']);
 		} else {
-			$flag = 1;
 			echo "<script>alert('Passwords must match');</script>";
 		}
 	}
 	if($flag == 0) {
 		header("Location: profile.php");
-	}
+	}	
 }
 
+	
+	
 
 ?>
 
@@ -59,39 +56,36 @@ if (isset($_POST['saveProfile'])) {
   <script src="menu.js"></script>
 </head>
 <body>
-
 <nav class="navbar navbar-expand-sm fixed-top bg-dark navbar-dark">
-  <a class="navbar-brand" href="about.php">Kalimotxo</a>
+  <a class="navbar-brand" href="main.php">Kalimotxo</a>
   <div class="collapse navbar-collapse justify-content-end">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="takeOutOrder.php">Order Online</a>
+        <a class="nav-link" href="takeOutOrder.html">Order Online</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="about.php">About</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="profile.php">My Profile</a>
+        <a class="nav-link" href="main.php">About</a>
       </li>
 	  <li class="nav-item">
-      <a class="nav-link" href="login.php"><span class="fas fa-sign-in-alt"></span> Logout</a>"
+			<a class="nav-link" href="main.php"><span class="fas fa-sign-out-alt"></span> Logout</a>
 	  </li>
-
 	</ul>
-  </div>
+  </div> 
 </nav>
 <br/>
 <br/>
 <br/>
 <br/>
-<form action=<?php echo $_SERVER['PHP_SELF'];?> method="post">
-<div class="container"style="margin-top:50px;" align="center">
+<div class="container">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
-                            <img src="https://34yigttpdc638c2g11fbif92-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/default-user-img.jpg" alt="" width="300" height="300" />
+                             <?php
+
+							displayImg($_SESSION['username']);
+							?>
                         </div>
-                    </div>
+                    </div>		
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
@@ -107,7 +101,7 @@ if (isset($_POST['saveProfile'])) {
                             </ul>
                         </div>
 						<br/>
-
+					
 						<div class="col-md-8">
 							<div class="tab-content profile-tab" id="myTabContent">
 								<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -145,9 +139,9 @@ if (isset($_POST['saveProfile'])) {
 										</div>
 									</div>
 								</div>
-
+														
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-
+								<form  action=<?php echo $_SERVER['PHP_SELF'];?> enctype="multipart/form-data" method="post"> 
 									<div class="row">
 										<div class="col-md-6">
                                             <label><Strong>Change Password:</Strong></label>
@@ -196,7 +190,7 @@ if (isset($_POST['saveProfile'])) {
 									</form>
 								</div>
 							</div>
-						</div>
+						</div> 
 					</div>
 				</div>
 			</div>
