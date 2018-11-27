@@ -17,7 +17,7 @@
 			}
 
 			body {
-				padding-left: 50px;
+				padding-left: 75px;
 				padding-right: 200px;
 				padding-top: 50px;
 			}
@@ -100,6 +100,10 @@
 	</head>
 
 <body>
+	<?php
+		session_start();
+	?>
+	
 	<nav class="navbar navbar-expand-sm fixed-top bg-dark navbar-dark">
 	  <a class="navbar-brand" href="main.html">LogoGoesHere</a>
 	  <div class="collapse navbar-collapse justify-content-end">
@@ -120,18 +124,21 @@
 	<div class="sidenav">
 	  <br><br>
 	  <h1>Order</h1>
-	  <div id="Penne Rosa"></div>
-	  <div id="Buttered Noodles"></div>
-	  <div id="Steak Stroganoff"></div>
-	  <div id="Pan Noodles"></div>
-	  <div id="Pad Thai"></div>
-	  <div id="Green Curry"></div>
+	  <div id="Burrito"></div>
+	  <div id="Taco"></div>
+	  <div id="Quesadilla"></div>
+	  <div id="Paella"></div>
+	  <div id="Nachos"></div>
+	  <div id="Spanish Omelette"></div>
 	  
 	  <div class="fixed">
 		<div id="total"><h1>Total: $0</h1></div>
 		<div>
 			&nbsp;&nbsp;&nbsp;
-			<input type="button" value="Place Order">
+			<form method="post" action=<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>>
+				<input type="hidden" id="orderArr" name="orderArr"></input>
+				<input type="submit" value="Place Order"></input>
+			</form>
 		</div>
 	  </div>
 	</div>
@@ -139,145 +146,146 @@
 	<br>
 	
 	<h1>Order</h1>
-	<h3>Classic Noodles</h3>
+	<h3>Classic Dishes</h3>
 
 	<div class="row">
 	  <div class="column">
-		<img src="penneRosa.jpg" alt="Penne Rosa" id="penne" style="width:100%">
+		<img src="burrito.jpg" alt="Burrito" id="burrito" style="width:100%">
 	  </div>
 	  
 	  <div class="column">
-		<img src="butteredNoodles.jpg" alt="Buttered Noodles" id="butter" style="width:100%;">
+		<img src="taco.png" alt="Taco" id="taco" style="width:100%;">
 	  </div>
 	  
 	  <div class="column">
-		<img src="steakStroganoff.jpg" alt="Steak Stroganoff" id="steak" style="width:100%">
+		<img src="quesadilla.jpg" alt="Quesadilla" id="quesadilla" style="width:100%">
 	  </div>
 	 
 	</div>
 	<div class="row">
 		<div class="space_lg2">&nbsp;</div>
 		<div class="space_lg3">&nbsp;</div>
-		<h5>Penne Rosa ($15)</h5>
+		<h5>Burrito ($15)</h5>
+		<div class="space_lg">&nbsp;</div>
 		<div class="space_lg2">&nbsp;</div>
-		<div class="space_lg3">&nbsp;</div>
-		<h5>Buttered Noodles ($13)</h5>
+		<h5>Taco ($13)</h5>
+		<div class="space_lg">&nbsp;</div>
 		<div class="space_lg2">&nbsp;</div>
-		<div class="space_lg3">&nbsp;</div>
-		<h5>Steak Stroganoff ($18)</h5>
+		<h5>Quesadilla ($18)</h5>
 	</div>
 	
 	<div class="row">
-		<div class="space_lg">&nbsp;</div>
+		<div class="space_lg2">&nbsp;</div>
+		<div class="space_lg2">&nbsp;</div>
 		
-		<input type="button" value="-" id="mPR">
+		<input type="button" value="-" id="mBU">
 		&nbsp;
-		<div id="numPR">0</div>
+		<div id="numBU">0</div>
 		&nbsp;
-		<input type="button" value="+" id="pPR">
-		
-		<div class="space_lg">&nbsp;</div>
-		<div class="space_lg">&nbsp;</div>
-		
-		<input type="button" value="-" id="mBN">
-		&nbsp;
-		<div id="numBN">0</div>
-		&nbsp;
-		<input type="button" value="+" id="pBN">
+		<input type="button" value="+" id="pBU">
 		
 		<div class="space_lg">&nbsp;</div>
+		<div class="space_lg2">&nbsp;</div>
+		<div class="space_lg3">&nbsp;</div>
+		
+		<input type="button" value="-" id="mTA">
+		&nbsp;
+		<div id="numTA">0</div>
+		&nbsp;
+		<input type="button" value="+" id="pTA">
+		
+		<div class="space_lg">&nbsp;</div>
 		<div class="space_lg">&nbsp;</div>
 		
-		<input type="button" value="-" id="mSS">
+		<input type="button" value="-" id="mQU">
 		&nbsp;
-		<div id="numSS">0</div>
+		<div id="numQU">0</div>
 		&nbsp;
-		<input type="button" value="+" id="pSS">
+		<input type="button" value="+" id="pQU">
 	</div>
 	
 	<br><br>
-	<h3>Asian Noodles</h3>
+	<h3>Signature Dishes</h3>
 	
 	<div class="row">
 	  <div class="column">
-		<img src="japPan.jpg" alt="Japan Pan" id="pan" style="width:100%">
+		<img src="paella.jpeg" alt="Paella" id="paella" style="width:100%">
 	  </div>
 	  
 	  <div class="column">
-		<img src="padThai.jpg" alt="Pad Thai" id="pad" style="width:100%;">
+		<img src="nachos.jpg" alt="Nachos" id="nachos" style="width:100%;">
 	  </div>
 	  
 	  <div class="column">
-		<img src="greenCurry.jpg" alt="Green Curry" id="curry" style="width:100%">
+		<img src="spanishOmelette.jpg" alt="Spanish Omelette" id="sO" style="width:100%">
 	  </div>
 	 
 	</div>
 	<div class="row">
 		<div class="space_lg2">&nbsp;</div>
-		<h5>Pan Noodles ($14)</h5>
-		<div class="space_lg">&nbsp;</div>
 		<div class="space_lg3">&nbsp;</div>
-		<h5>Pad Thai ($15)</h5>
+		<h5>Paella ($14)</h5>
 		<div class="space_lg">&nbsp;</div>
-		<div class="space_lg3">&nbsp;</div>
-		<h5>Green Curry ($20)</h5>
+		<div class="space_lg2">&nbsp;</div>
+		<h5>Nachos ($15)</h5>
+		<div class="space_lg">&nbsp;</div>
+		<h5>Spanish Omelette ($20)</h5>
 	</div>
 	
 	<div class="row">
 		<div class="space_lg">&nbsp;</div>
 		
-		<input type="button" value="-" id="mJP">
+		<input type="button" value="-" id="mPA">
 		&nbsp;
-		<div id="numJP">0</div>
+		<div id="numPA">0</div>
 		&nbsp;
-		<input type="button" value="+" id="pJP">
+		<input type="button" value="+" id="pPA">
+		
+		<div class="space_lg">&nbsp;</div>
+		<div class="space_lg2">&nbsp;</div>
+		<div class="space_lg3">&nbsp;</div>
+		
+		<input type="button" value="-" id="mNA">
+		&nbsp;
+		<div id="numNA">0</div>
+		&nbsp;
+		<input type="button" value="+" id="pNA">
 		
 		<div class="space_lg">&nbsp;</div>
 		<div class="space_lg">&nbsp;</div>
 		
-		<input type="button" value="-" id="mPT">
+		<input type="button" value="-" id="mSO">
 		&nbsp;
-		<div id="numPT">0</div>
+		<div id="numSO">0</div>
 		&nbsp;
-		<input type="button" value="+" id="pPT">
-		
-		<div class="space_lg">&nbsp;</div>
-		<div class="space_lg">&nbsp;</div>
-		
-		<input type="button" value="-" id="mGC">
-		&nbsp;
-		<div id="numGC">0</div>
-		&nbsp;
-		<input type="button" value="+" id="pGC">
+		<input type="button" value="+" id="pSO">
 	</div>
 	<br>
 	
 	<script>
 		let arr = [];
-		arr["numPR"] = 0;
-		arr["numBN"] = 0;
-		arr["numSS"] = 0;
-		arr["numJP"] = 0;
-		arr["numPT"] = 0;
-		arr["numGC"] = 0;
+		arr["numBU"] = arr["numTA"] = arr["numQU"] = arr["numPA"] = arr["numNA"] = arr["numSO"] = 0;
+		//console.log(arr);
+		//let arr2 = ["numBU", "numTA", "numQU", "numPA", "numNA", "numSO"];
+		//let names = ["Burrito", "Taco", "Quesadilla", "Paella", "Nachos", "Spanish Omelette"];
 		
 		main();
 		
 		function main() {
 			console.log("hey");
-			document.getElementById("mPR").addEventListener("click", function() {line(false, "numPR", "Penne Rosa");});
-			document.getElementById("pPR").addEventListener("click", function() {line(true, "numPR", "Penne Rosa");});
-			document.getElementById("mBN").addEventListener("click", function() {line(false, "numBN", "Buttered Noodles");});
-			document.getElementById("pBN").addEventListener("click", function() {line(true, "numBN", "Buttered Noodles");});
-			document.getElementById("mSS").addEventListener("click", function() {line(false, "numSS", "Steak Stroganoff");});
-			document.getElementById("pSS").addEventListener("click", function() {line(true, "numSS", "Steak Stroganoff");});
+			document.getElementById("mBU").addEventListener("click", function() {line(false, "numBU", "Burrito");});
+			document.getElementById("pBU").addEventListener("click", function() {line(true, "numBU", "Burrito");});
+			document.getElementById("mTA").addEventListener("click", function() {line(false, "numTA", "Taco");});
+			document.getElementById("pTA").addEventListener("click", function() {line(true, "numTA", "Taco");});
+			document.getElementById("mQU").addEventListener("click", function() {line(false, "numQU", "Quesadilla");});
+			document.getElementById("pQU").addEventListener("click", function() {line(true, "numQU", "Quesadilla");});
 			
-			document.getElementById("mJP").addEventListener("click", function() {line(false, "numJP", "Pan Noodles");});
-			document.getElementById("pJP").addEventListener("click", function() {line(true, "numJP", "Pan Noodles");});
-			document.getElementById("mPT").addEventListener("click", function() {line(false, "numPT", "Pad Thai");});
-			document.getElementById("pPT").addEventListener("click", function() {line(true, "numPT", "Pad Thai");});
-			document.getElementById("mGC").addEventListener("click", function() {line(false, "numGC", "Green Curry");});
-			document.getElementById("pGC").addEventListener("click", function() {line(true, "numGC", "Green Curry");});
+			document.getElementById("mPA").addEventListener("click", function() {line(false, "numPA", "Paella");});
+			document.getElementById("pPA").addEventListener("click", function() {line(true, "numPA", "Paella");});
+			document.getElementById("mNA").addEventListener("click", function() {line(false, "numNA", "Nachos");});
+			document.getElementById("pNA").addEventListener("click", function() {line(true, "numNA", "Nachos");});
+			document.getElementById("mSO").addEventListener("click", function() {line(false, "numSO", "Spanish Omelette");});
+			document.getElementById("pSO").addEventListener("click", function() {line(true, "numSO", "Spanish Omelette");});
 		}
 		
 		
@@ -298,13 +306,21 @@
 			}
 			
 			document.getElementById(count).innerHTML = arr[count];
-			let totalNum = arr["numPR"] * 15 + arr["numBN"] * 13 + arr["numSS"] * 18
-				+ arr["numJP"] * 14 + arr["numPT"] * 15 + arr["numGC"] * 20;
+			let totalNum = arr["numBU"] * 15 + arr["numTA"] * 13 + arr["numQU"] * 18
+				+ arr["numPA"] * 14 + arr["numNA"] * 15 + arr["numSO"] * 20;
 			document.getElementById("total").innerHTML = "<h1>Total: $" + totalNum + "</h1>";
+			document.getElementById("orderArr").innerHTML = arr;
 		}
-		
-		
-		
 	</script>
+	
+	<?php
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
+			if (isset($_SESSION['username']) && isset($_SESSION['password']) {
+				if ($_POST['orderArr']) {
+					$_SESSION['orderArr'] = $_POST['orderArr'];
+				}
+			}
+		}
+	?>
 	</body>
 </html>
