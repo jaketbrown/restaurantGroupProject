@@ -104,7 +104,6 @@ require_once('database.php');
 
 	<table>
 		<tr><strong>Sides</strong></tr>
-
 		<tr>
 			<td>Tacos</td>
 			<td>$13.00</td>
