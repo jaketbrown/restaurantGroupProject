@@ -15,9 +15,7 @@
 <body>
 
 <?php
-
 require_once("database.php");
-
 $_SESSION["loggedIn"] = false;
 if ($_SESSION["loggedIn"] == true) {
   header("Location: profile.php");
@@ -35,7 +33,7 @@ $top = <<<TOP
         <a class="nav-link" href="about.php">About</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="profile.php">My Profile</a>
+        <a class="nav-link" href="login.php">My Profile</a>
       </li>
     <li class="nav-item">
       <a class="nav-link" href="login.php"><span class="fas fa-sign-in-alt"></span> Login</a>
@@ -45,12 +43,9 @@ $top = <<<TOP
 </nav>
 <br/>
 <div class="container" style="margin-top:50px;" align="center">
-
   <!-- 1st row -->
     <div class="col-sm-6">
       <h4><em>Login</em></h3>
-
-
     <br/>
     <input type="username" id="username" placeholder="Enter username" name = "username" required/ size=25%>
     <br/>
@@ -58,16 +53,13 @@ $top = <<<TOP
     <br/>
     <br/>
     <input type="submit" name = "login" value = "Login" id="login">
-    <a href="forgetPassword.php">forget password</a>
+
     <br/>
     <a href="registration.php">Create an account</a>
     </br>
-
 TOP;
 }
-
 $bot = "";
-
 if (isset($_POST["login"])) {
   $_SESSION["username"] = $_POST["username"];
   $_SESSION["password"] = $_POST["password"];
@@ -82,16 +74,12 @@ if (isset($_POST["login"])) {
     <strong>Username or password is incorrect</strong>
 BOT;
     }
-
   } else {
   $bot .= <<<BOT
     <strong>Username or password is incorrect</strong> <br>
 BOT;
-
   }
-
 }
-
 echo $top;
 echo $bot;
 echo "</form>";

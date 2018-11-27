@@ -32,11 +32,11 @@ if (isset($_POST['saveProfile'])) {
 	}
 	if($flag == 0) {
 		header("Location: profile.php");
-	}	
+	}
 }
 
-	
-	
+
+
 
 ?>
 
@@ -61,16 +61,25 @@ if (isset($_POST['saveProfile'])) {
   <div class="collapse navbar-collapse justify-content-end">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" href="takeOutOrder.html">Order Online</a>
+        <a class="nav-link" href="takeOutOrder.php">Order Online</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="main.php">About</a>
+              <a class="nav-link" href="about.php">About</a>
       </li>
-	  <li class="nav-item">
-			<a class="nav-link" href="main.php"><span class="fas fa-sign-out-alt"></span> Logout</a>
-	  </li>
+      <li class="nav-item">
+        <a class="nav-link" href="profile.php">My Profile</a>
+      </li>
+      <li class="nav-item">
+        <?php if ($_SESSION["loggedIn"] == true) {
+          echo "<a class=\"nav-link\" href=\"login.php\"><span class=\"fas fa-sign-in-alt\"></span> Logout</a>";
+        } else {
+          echo "<a class=\"nav-link\" href=\"login.php\"><span class=\"fas fa-sign-in-alt\"></span> Login</a>";
+        }
+        ?>
+
+  	  </li>
 	</ul>
-  </div> 
+  </div>
 </nav>
 <br/>
 <br/>
@@ -85,7 +94,7 @@ if (isset($_POST['saveProfile'])) {
 							displayImg($_SESSION['username']);
 							?>
                         </div>
-                    </div>		
+                    </div>
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
@@ -101,7 +110,7 @@ if (isset($_POST['saveProfile'])) {
                             </ul>
                         </div>
 						<br/>
-					
+
 						<div class="col-md-8">
 							<div class="tab-content profile-tab" id="myTabContent">
 								<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
@@ -139,9 +148,9 @@ if (isset($_POST['saveProfile'])) {
 										</div>
 									</div>
 								</div>
-														
+
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-								<form  action=<?php echo $_SERVER['PHP_SELF'];?> enctype="multipart/form-data" method="post"> 
+								<form  action=<?php echo $_SERVER['PHP_SELF'];?> enctype="multipart/form-data" method="post">
 									<div class="row">
 										<div class="col-md-6">
                                             <label><Strong>Change Password:</Strong></label>
@@ -190,7 +199,7 @@ if (isset($_POST['saveProfile'])) {
 									</form>
 								</div>
 							</div>
-						</div> 
+						</div>
 					</div>
 				</div>
 			</div>

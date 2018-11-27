@@ -2,8 +2,8 @@
 session_start();
 
 $host = "localhost";
-$user = "dbuser";
-$password = "goodbyeWorld";
+$user = "root";
+$password = "";
 $database = "mydb";
 $db = mysqli_connect($host, $user, $password, $database) or die("failed to connect to db");
 
@@ -29,7 +29,7 @@ function getUserInfo($username) {
 	} else {
 		$mysql_array = mysqli_fetch_array($result, MYSQLI_ASSOC);
 		return $mysql_array;
-		
+
 	}
 	mysqli_close($db);
 }
@@ -133,12 +133,8 @@ function displayImg($username) {
 	//} else {
 	//	echo '<img src="data:image/jpeg;base64,'.base64_encode( $result['profilepic'] ).'"/>';
 	//}
-	
+
 }
 
 
 ?>
-
-
-
-

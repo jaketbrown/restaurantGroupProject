@@ -20,18 +20,21 @@ require_once("database.php");
 $top = <<<TOP
 <form action="{$_SERVER['PHP_SELF']}" method = "post" >
 <nav class="navbar navbar-expand-sm fixed-top bg-dark navbar-dark">
-  <a class="navbar-brand" href="main.html">LogoGoesHere</a>
+  <a class="navbar-brand" href="about.php">LogoGoesHere</a>
   <div class="collapse navbar-collapse justify-content-end">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" href="#">Order Online</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
+  <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="#"><span class="fas fa-sign-in-alt"></span> Login</a>
+      <a class="nav-link" href="takeOutOrder.php">Order Online</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" href="about.php">About</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="profile.php">My Profile</a>
+    </li>
+  <li class="nav-item">
+    <a class="nav-link" href="login.php"><span class="fas fa-sign-in-alt"></span> Login</a>
+  </li>
   </ul>
   </div>
 </nav>
