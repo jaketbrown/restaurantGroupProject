@@ -12,28 +12,7 @@ if ($arr['profilepic']) {
 $bio = $arr['bio'];
 $email = $arr['email'];
 $flag = 0;
-if (isset($_POST['saveProfile'])) {
-	if(isset($_POST['changePic'])) {
-		$file = addslashes(file_get_contents($_FILES["name"]["tmp_name"]));
-	    changeProfilePic($_SESSION['username'], $file);
-	}
-	if(isset($_POST['changeBio']) && $_POST['changeBio'] != "") {
-		changeBio($_SESSION['username'], $_POST['changeBio']);
-	}
-	if(isset($_POST['changeEmail']) && $_POST['changeEmail'] != "") {
-		changeEmail($_SESSION['username'], $_POST['changeEmail']);
-	}
-	if(isset($_POST['changePassword']) && isset($_POST['confirmChangePassword']) && $_POST['changePassword'] != "" && $_POST['confirmChangePassword'] != "") {
-		if($_POST['changePassword'] === $_POST['confirmChangePassword']) {
-			changePassword($_SESSION['username'], $_POST['changePassword']);
-		} else {
-			echo "<script>alert('Passwords must match');</script>";
-		}
-	}
-	if($flag == 0) {
-		header("Location: profile.php");
-	}
-}
+
 
 
 
@@ -93,7 +72,13 @@ if (isset($_POST['saveProfile'])) {
 
 							displayImg($_SESSION['username']);
 							?>
-                        </div>
+                        </div>	
+				<form method="post" enctype="multipart/form-data">  
+                     <input type="file" name="changePic" id="changePic" />  
+                     <br />  
+					 <br />
+                     <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-info" />  
+                </form>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
@@ -156,7 +141,7 @@ if (isset($_POST['saveProfile'])) {
                                             <label><Strong>Change Password:</Strong></label>
                                         </div>
                                         <div class="col-md-6">
-											<input type="text" id="changePassword" name="changePassword"></input>
+											<input type="password" id="changePassword" name="changePassword"></input>
                                         </div>
                                     </div>
 									<br/>
@@ -165,7 +150,7 @@ if (isset($_POST['saveProfile'])) {
                                             <label><Strong>Confirm Password:</Strong></label>
                                         </div>
                                         <div class="col-md-6">
-											<input type="text" id="confirmChangePassword" name="confirmChangePassword"></input>
+											<input type="password" id="confirmChangePassword" name="confirmChangePassword"></input>
                                         </div>
                                     </div>
 									<br/>
@@ -178,14 +163,6 @@ if (isset($_POST['saveProfile'])) {
                                         </div>
                                     </div>
 									<br/>
-									<div class="row">
-										<div class="col-md-6">
-                                            <label><Strong>Change Picture:</Strong></label>
-										</div>
-										<div class="col-md-4">
-											<input class="btn" type="file" id="changePic" name="changePic"/>
-										</div>
-									</div>
 									<br/>
 									<div class="row">
 										<div class="col-md-12">
@@ -206,3 +183,63 @@ if (isset($_POST['saveProfile'])) {
         </div>
 	</body>
 </html>
+<script>
+ $(document).ready(function(){  
+      $('#insert').click(function(){  
+           var image_name = $('#image').val();  
+           if(image_name == '')  
+           {  
+                alert("Please Select Image");  
+                return false;  
+           }  
+           else  
+           {  
+                var extension = $('#image').val().split('.').pop().toLowerCase();  
+                if(jQuery.inArray(extension, ['gif','png','jpg','jpeg']) == -1)  
+                {  
+                     alert('Invalid Image File');  
+                     $('#image').val('');  
+                     return false;  
+                }  
+           }
+      });  
+ });
+</script>
+<?php
+
+
+if(isset($_POST["insert"])) {
+	if($_FILES['changePic']['tmp_name']) {
+		$file = $_FILES['changePic']['tmp_name'];
+	    changeProfilePic($_SESSION['username'], $file);
+		
+	}
+}
+
+if (isset($_POST['saveProfile'])) {
+
+	$flag = 0;
+	if(isset($_POST['changePassword']) && isset($_POST['confirmChangePassword']) && $_POST['changePassword'] != "" && $_POST['confirmChangePassword'] != "") {
+		if($_POST['changePassword'] === $_POST['confirmChangePassword']) {
+			changePassword($_SESSION['username'], $_POST['changePassword']);
+		} else {
+			$flag = 1;
+			echo "<script>alert('Passwords must match');</script>";
+			
+		}
+	}
+	if(isset($_POST['changeBio']) && $_POST['changeBio'] != "") {
+		if ($flag == 0) {
+			changeBio($_SESSION['username'], $_POST['changeBio']);
+		}
+	}
+	if(isset($_POST['changeEmail']) && $_POST['changeEmail'] != "") {
+		if ($flag == 0) {
+			changeEmail($_SESSION['username'], $_POST['changeEmail']);
+		}
+	}
+}
+
+
+
+?>
