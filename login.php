@@ -25,7 +25,7 @@ if ($_SESSION["loggedIn"] == true) {
 $top = <<<TOP
 <form action="{$_SERVER['PHP_SELF']}" method = "post" >
 <nav class="navbar navbar-expand-sm fixed-top bg-dark navbar-dark">
-  <a class="navbar-brand" href="main.html">LogoGoesHere</a>
+  <a class="navbar-brand" href="about.php">Kalimotxo</a>
   <div class="collapse navbar-collapse justify-content-end">
     <ul class="navbar-nav">
       <li class="nav-item">

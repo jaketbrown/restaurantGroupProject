@@ -85,7 +85,7 @@ if (isset($_POST['saveProfile'])) {
 <br/>
 <br/>
 <form action=<?php echo $_SERVER['PHP_SELF'];?> method="post">
-<div class="container">
+<div class="container"style="margin-top:50px;" align="center">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
